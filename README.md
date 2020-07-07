@@ -18,6 +18,7 @@ place filePicker.py in same directory
 and import using 
 
 import filePicker
+
 selectedFiles=filePicker.SelectedFiles()
 
 selectedFiles will contain list of path  selected files
