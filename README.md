@@ -1,24 +1,58 @@
 # FilePicker
-cmd line file picker.
-enter number shown beside the files/folders to choose them.
-enter .. for previous directory.
-returns a list with full file path of chosen files.
+It is a command-line utility to select files.
 
-Note:
-Directly changing directory will loose
-previous selections. 
-To preserve previous selections,
-select all needed files from current
-directory then hit enter, select y, and
-navigate to desired directory and then 
-select necessary files. 
+# Implementation
+Place FilePicker.py in same folder as your python project and use it as follows:
+```python
+from FilePicker import FilePicker
+
+selectedFiles = FilePicker(path, permission)
+"""
+                path:
+                    -the directory path where you want to pick files
+                    -if not supplied or if supplied path is bad(does not exists, inaccessible) defaultPath is used
+                    -defaultPath is set to current working directory, can be changed in FilePicker.py
+                    
+                permission:
+                    -is permission for others(not owner and not groups)
+                    -can be a valid combination of rwx, only files/folders with given permission is shown
+                    -if not specified or if specified permission is bad(invalid permission, nothing matches given permission), default permission is used
+                    -defaultPermission is set to "r", can be changed in FilePicker.py
+               
+               selectedFiles:
+                   -it will be a list with full path of selected files
+"""
+```
 
 # Usage
-place filePicker.py in same directory 
-and import using 
+FilePicker prints all files/folders, in the given path and permission, a number preceding it and a trailing "[DIR]" if its a folder:
 
-import filePicker
+> 0 file1
 
-selectedFiles=filePicker.SelectedFiles()
+> 1 file2
 
-selectedFiles will contain list of path  selected files
+> 2 folder1 [DIR]
+
+> 3 folder2 [DIR]
+
+
+## Selection Methods
+
+### individual selection
+
+Input numbers seperated by commas to select files/folders crossponding to those number, after selecting all files if there is a directory it will switch to that directory to offer selection in that directory
+
+### select all
+
+Selects every entry listed, it is not recursive so if there is a directory in selection it will switch to that directory to offer selection in that directory after selecting all files
+
+### regex selection
+
+To select using regular expression, input regular expression in this format:
+
+>r regularExpression
+
+"r" followed by a whitespace then your regular expression
+
+
+
